@@ -1,0 +1,54 @@
+<ul class="container-fluid list-group">
+  <div *ngFor="let quiz of quizzes; let i=index">
+    <li class="list-group-item" >
+      Quiz # {{i}}
+      <br>
+      Questions:
+      <ul class="container" class="list-group">
+        <li *ngFor="let question of quiz.questions" class="list-group-item">
+          <h2>Title: {{question.title}}</h2>
+          <h5>Points: {{question.points}}</h5>
+          <p>Description: {{question.description}}</p>
+          <div *ngIf="question.type=='tf'">
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+              <label class="custom-control-label" for="customRadio1">True</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">False</label>
+            </div>
+          </div>
+
+          <div *ngIf="question.type=='essay'" class="form-group">
+            <label for="exampleTextarea">Essay input</label>
+            <textarea class="form-control" id="exampleTextarea" rows="5"></textarea>
+          </div>
+
+          <div *ngIf="question.type=='mc'">
+              <div  class="btn-group" data-toggle="buttons">
+                <label *ngFor="let option of question.options" class="btn btn-primary active">
+                  <input type="radio" autocomplete="off"> {{option}}
+                </label>
+              </div>
+            </div>
+          <div *ngIf="question.type=='blank'">
+            {{question.body.substr(0, question.body.indexOf('['))}}
+            <div class="form-group">
+              <input type="email" class="form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </li>
+    <Button class="btn btn-success">
+      Submit
+    </Button>
+    <Button class="btn btn-danger">
+      Cancel
+    </Button>
+
+  </div>
+
+</ul>
